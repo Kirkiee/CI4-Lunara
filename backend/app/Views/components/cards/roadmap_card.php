@@ -8,7 +8,7 @@
 // $statusClass: string
 ?>
 
-<article class="flex flex-col bg-white/10 shadow-lg hover:shadow-2xl p-6 border border-white/20 rounded-2xl transition-all duration-500 hover:-translate-y-1 card-hover">
+<article class="flex flex-col bg-white/5 border border-white/10 shadow-lg rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl card-hover">
 
     <!-- Title and Status -->
     <?php if (!empty($title)): ?>
@@ -38,7 +38,8 @@
                 Priority: <?= esc($priority) ?>
             </span>
         <?php endif; ?>
-        <a href="#" class="bg-indigo-400 hover:bg-indigo-500 px-4 py-2 rounded-full text-gray-900 text-sm font-semibold transition">
+        <a href="#"
+            class="bg-gradient-to-br from-indigo-400 to-purple-400 hover:from-indigo-500 hover:to-purple-500 px-4 py-2 rounded-full text-gray-100 text-sm font-semibold transition-all duration-300">
             View
         </a>
     </div>
