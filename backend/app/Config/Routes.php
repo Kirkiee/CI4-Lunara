@@ -12,6 +12,11 @@ $routes->get('/moodboard', 'Users::moodboard');
 $routes->get('/roadmap', 'Users::roadmap');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
+$routes->get('/admin/stock', 'Admin::stock');
+$routes->get('/admin/orders', 'Admin::orders');
+$routes->get('/admin/accounts', 'Admin::accounts');
+$routes->get('/admin/request', 'Admin::request');
+
 
 
 $routes->post('login', 'Auth::login');
