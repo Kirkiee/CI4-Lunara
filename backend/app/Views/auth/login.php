@@ -99,7 +99,7 @@
 
         <p class="text-center text-gray-300 mt-6 text-sm">
             Don’t have an account?
-            <a href="/signupPage" class="text-indigo-300 hover:text-indigo-400 font-semibold">Sign Up</a>
+            <a href="/signup" class="text-indigo-300 hover:text-indigo-400 font-semibold">Sign Up</a>
         </p>
 
         <p class="text-center mt-6">
