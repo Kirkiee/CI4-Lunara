@@ -19,4 +19,25 @@ class Admin extends BaseController
     {
         return view('admin/dashboard');
     }
+    public function stock()
+    {
+        return view('admin/stock');
+    }
+
+    public function orders()
+    {
+        return view('admin/orders');
+    }
+
+    public function accounts()
+    {
+        // This will load your accounts.php view
+        return view('admin/accounts');
+    }
+
+
+    public function request()
+    {
+        return view('admin/request');
+    }
 }
