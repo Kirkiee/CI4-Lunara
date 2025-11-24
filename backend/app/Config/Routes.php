@@ -22,3 +22,4 @@ $routes->get('/admin/request', 'Admin::request');
 $routes->post('login', 'Auth::login');
 $routes->post('logout', 'Auth::logout');
 $routes->post('signup', 'Auth::signup');
+$routes->get('/test/show', 'CRUDTesting::showUsersPage');
