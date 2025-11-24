@@ -3,8 +3,8 @@
 use CodeIgniter\Router\RouteCollection;
 
 /**
- * @var RouteCollection $routes
- */
+ 
+@var RouteCollection $routes*/
 $routes->get('/', 'Users::index');
 $routes->get('/login', 'Auth::showLogin');
 $routes->get('/signup', 'Auth::showSignup');
@@ -23,3 +23,4 @@ $routes->post('login', 'Auth::login');
 $routes->post('logout', 'Auth::logout');
 $routes->post('signup', 'Auth::signup');
 $routes->get('/test/show', 'CRUDTesting::showUsersPage');
+$routes->post('/admin/accounts/create', 'test\UserCreate::CRUDTesting');
