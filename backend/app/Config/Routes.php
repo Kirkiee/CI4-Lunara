@@ -25,3 +25,4 @@ $routes->post('signup', 'Auth::signup');
 $routes->get('/test/show', 'CRUDTesting::showUsersPage');
 $routes->post('/admin/accounts/create', 'test\UserCreate::CRUDTesting');
 $routes->post('/admin/accounts/update/(:num)', 'test\UserUpdate::update/$1');
+$routes->post('/admin/accounts/delete/(:num)', 'test\UserDelete::delete/$1');
