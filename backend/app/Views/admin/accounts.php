@@ -178,6 +178,7 @@ $current = uri_string();
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -195,19 +196,33 @@ $current = uri_string();
                             $statusLabel = $u->account_status ? 'Active' : 'Inactive';
                             ?>
                             <tr>
+                                <td><?= esc($u->id) ?></td>
                                 <td><?= esc($fullName) ?></td>
                                 <td><?= esc($u->email) ?></td>
                                 <td class="font-medium text-[#8ecae6]"><?= ucfirst($u->type) ?></td>
                                 <td class="<?= $statusClass ?>"><?= $statusLabel ?></td>
                                 <td><?= esc($u->created_at) ?></td>
                                 <td class="text-right">
-                                    <button class="text-[#8ecae6] hover:text-[#a8dadc]">Edit</button>
+
+                                    <!-- ➤ ADDED (NEW): EDIT BUTTON WITH DATA -->
+                                    <button
+                                        class="text-[#8ecae6] hover:text-[#a8dadc]"
+                                        onclick="openEditModal(
+                                    '<?= $u->id ?>',
+                                    '<?= esc($u->first_name) ?>',
+                                    '<?= esc($u->middle_name) ?>',
+                                    '<?= esc($u->last_name) ?>',
+                                    '<?= esc($u->email) ?>',
+                                    '<?= $u->type ?>',
+                                    '<?= $u->account_status ?>'
+                                )">
+                                        Edit
+                                    </button>
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
-
-
                 </table>
             </div>
         </section>
@@ -234,6 +249,7 @@ $current = uri_string();
                 <option value="client">Client</option>
                 <option value="admin">Admin</option>
             </select>
+
             <input type="hidden" name="account_status" value="1">
 
             <div class="flex justify-end gap-2 mt-4">
@@ -247,6 +263,56 @@ $current = uri_string();
         </form>
     </dialog>
 
+    <!-- ➤ ADDED (NEW): EDIT ACCOUNT MODAL -->
+    <dialog id="editAccountModal" class="bg-gray-900/90 backdrop:bg-black/60 p-6 rounded-xl w-96">
+        <h3 class="mb-4 font-bold text-[#8ecae6] text-2xl">Edit Account</h3>
+
+        <form id="editForm" method="post" class="space-y-4">
+            <?= csrf_field() ?>
+
+            <input type="text" name="first_name" id="edit_first_name" class="input-field" required>
+            <input type="text" name="middle_name" id="edit_middle_name" class="input-field">
+            <input type="text" name="last_name" id="edit_last_name" class="input-field" required>
+
+            <input type="email" name="email" id="edit_email" class="input-field" required>
+
+            <select name="type" id="edit_type" class="input-field" required>
+                <option value="client">Client</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <select name="account_status" id="edit_status" class="input-field" required>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" onclick="document.getElementById('editAccountModal').close();" class="bg-gray-600 btn-arctic">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-arctic">
+                    Update
+                </button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ➤ ADDED (NEW JAVASCRIPT) -->
+    <script>
+        function openEditModal(id, first, middle, last, email, type, status) {
+            document.getElementById('edit_first_name').value = first;
+            document.getElementById('edit_middle_name').value = middle;
+            document.getElementById('edit_last_name').value = last;
+            document.getElementById('edit_email').value = email;
+            document.getElementById('edit_type').value = type;
+            document.getElementById('edit_status').value = status;
+
+            // Important: set form action to include user ID
+            document.getElementById('editForm').action = "/admin/accounts/update/" + id;
+
+            document.getElementById('editAccountModal').showModal();
+        }
+    </script>
 
 </body>
 

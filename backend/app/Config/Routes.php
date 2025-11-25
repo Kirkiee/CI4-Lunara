@@ -24,3 +24,4 @@ $routes->post('logout', 'Auth::logout');
 $routes->post('signup', 'Auth::signup');
 $routes->get('/test/show', 'CRUDTesting::showUsersPage');
 $routes->post('/admin/accounts/create', 'test\UserCreate::CRUDTesting');
+$routes->post('/admin/accounts/update/(:num)', 'test\UserUpdate::update/$1');
