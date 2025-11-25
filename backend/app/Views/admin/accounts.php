@@ -200,9 +200,22 @@ $current = uri_string();
                                 <td class="font-medium text-[#8ecae6]"><?= ucfirst($u->type) ?></td>
                                 <td class="<?= $statusClass ?>"><?= $statusLabel ?></td>
                                 <td><?= esc($u->created_at) ?></td>
-                                <td class="text-right">
-                                    <button class="text-[#8ecae6] hover:text-[#a8dadc]">Edit</button>
+                                <td class="text-right flex justify-end gap-2">
+                                    <!-- Edit Button -->
+                                    <button class="text-[#8ecae6] hover:text-[#a8dadc]">
+                                        Edit
+                                    </button>
+
+                                    <!-- Delete Button -->
+                                    <form action="/admin/accounts/delete/<?= $u->id ?>" method="post"
+                                        onsubmit="return confirm('Are you sure you want to delete this account?');">
+                                        <?= csrf_field() ?>
+                                        <button type="submit" class="text-red-400 hover:text-red-300">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
+
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

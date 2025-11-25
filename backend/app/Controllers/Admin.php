@@ -49,20 +49,24 @@ class Admin extends BaseController
     {
         $userModel = new UsersModel();
 
-        // Collect statistics
-        $totalAccounts = $userModel->countAllResults();
+        // Collect statistics (only non-soft-deleted users)
+        $totalAccounts = $userModel->where('deleted_at', null)->countAllResults();
 
-        // active users
-        $activeUsers = $userModel->where('account_status', 1)->countAllResults();
+        $activeUsers = $userModel->where('account_status', 1)
+            ->where('deleted_at', null)
+            ->countAllResults();
 
-        // admin count
-        $adminCount = $userModel->where('type', 'admin')->countAllResults();
+        $adminCount = $userModel->where('type', 'admin')
+            ->where('deleted_at', null)
+            ->countAllResults();
 
         // Reset model builder (important)
         $userModel->resetQuery();
 
-        // Fetch entire user list
-        $users = $userModel->orderBy('created_at', 'DESC')->findAll();
+        // Fetch all *non-soft-deleted* users
+        $users = $userModel->where('deleted_at', null)
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
 
         $data = [
             'total_accounts' => $totalAccounts,
@@ -73,6 +77,7 @@ class Admin extends BaseController
 
         return view('admin/accounts', $data);
     }
+
 
     public function request()
     {
