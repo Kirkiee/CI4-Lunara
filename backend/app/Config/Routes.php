@@ -12,6 +12,7 @@ $routes->get('/moodboard', 'Users::moodboard');
 $routes->get('/roadmap', 'Users::roadmap');
 $routes->get('/shop', 'Users::shop');
 $routes->get('/contact', 'Users::contact');
+$routes->get('/cart', 'Users::cart');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
 $routes->get('/admin/stock', 'Admin::stock');
