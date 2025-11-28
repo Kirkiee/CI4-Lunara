@@ -22,8 +22,8 @@ $session = session();
         <!-- NAVIGATION -->
         <nav class="space-x-6 text-sm font-semibold flex items-center">
             <a href="/" class="hover:text-indigo-300">Home</a>
-            <a href="#products" class="hover:text-indigo-300">Flowers</a>
-            <a href="#contact" class="hover:text-indigo-300">Contact</a>
+            <a href="/shop" class="hover:text-indigo-300">Flowers</a>
+            <a href="/contact" class="hover:text-indigo-300">Contact</a>
 
             <!-- Buttons on the right -->
             <div class="flex items-center space-x-3 ml-4">
