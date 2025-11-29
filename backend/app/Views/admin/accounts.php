@@ -202,11 +202,22 @@ $current = uri_string();
                                 <td class="font-medium text-[#8ecae6]"><?= ucfirst($u->type) ?></td>
                                 <td class="<?= $statusClass ?>"><?= $statusLabel ?></td>
                                 <td><?= esc($u->created_at) ?></td>
-                                <td class="text-right flex justify-end gap-2">
+                                <td class="flex justify-end gap-2 text-right">
                                     <!-- Edit Button -->
-                                    <button class="text-[#8ecae6] hover:text-[#a8dadc]">
+                                    <button
+                                        class="text-[#8ecae6] hover:text-[#a8dadc]"
+                                        onclick="openEditModal(
+        '<?= $u->id ?>',
+        '<?= esc($u->first_name) ?>',
+        '<?= esc($u->middle_name) ?>',
+        '<?= esc($u->last_name) ?>',
+        '<?= esc($u->email) ?>',
+        '<?= esc($u->type) ?>',
+        '<?= esc($u->account_status) ?>'
+    )">
                                         Edit
                                     </button>
+
 
                                     <!-- Delete Button -->
                                     <form action="/admin/accounts/delete/<?= $u->id ?>" method="post"
