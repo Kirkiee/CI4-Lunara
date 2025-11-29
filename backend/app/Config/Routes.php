@@ -3,8 +3,9 @@
 use CodeIgniter\Router\RouteCollection;
 
 /**
- 
-@var RouteCollection $routes*/
+@var RouteCollection $routes
+ */
+
 $routes->get('/', 'Users::index');
 $routes->get('/login', 'Auth::showLogin');
 $routes->get('/signup', 'Auth::showSignup');
@@ -15,7 +16,7 @@ $routes->get('/contact', 'Users::contact');
 $routes->get('/cart', 'Users::cart');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
-$routes->get('/admin/stock', 'Admin::stock');
+
 $routes->get('/admin/orders', 'Admin::orders');
 $routes->get('/admin/accounts', 'Admin::accounts');
 $routes->get('/admin/request', 'Admin::request');
@@ -28,3 +29,5 @@ $routes->get('/test/show', 'CRUDTesting::showUsersPage');
 $routes->post('/admin/accounts/create', 'test\UserCreate::CRUDTesting');
 $routes->post('/admin/accounts/update/(:num)', 'test\UserUpdate::update/$1');
 $routes->post('/admin/accounts/delete/(:num)', 'test\UserDelete::delete/$1');
+$routes->get('/admin/stock', 'StockTest\StockCreate::index');
+$routes->post('/admin/stock/create', 'StockTest\StockCreate::create');
