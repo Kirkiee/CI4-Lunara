@@ -166,6 +166,49 @@
             'price' => '259',
             'image' => 'https://www.oderings.co.nz/assets/Argranthemum-Sassy-Red-web_T_144491_5.jpg'
         ]) ?>
+
+        <?= view('components/cards/product_card', [
+            'title' => 'Frostpetal Orchids',
+            'description' => 'Icy blue orchids that shimmer like frost under the northern lights.',
+            'price' => '329',
+            'image' => 'https://blacksheepperennials.com/cdn/shop/files/Lamium_OrchidFrost.png?v=1751392662'
+        ]) ?>
+
+        <?= view('components/cards/product_card', [
+            'title' => 'Aurora Peonies',
+            'description' => 'Soft pastel peonies glowing gently like the aurora horizon.',
+            'price' => '379',
+            'image' => 'https://wholesalefloristdirect.co.uk/wp-content/uploads/2025/06/aurora-peony-ivory.jpg'
+        ]) ?>
+
+        <?= view('components/cards/product_card', [
+            'title' => 'Glacier Hydrangeas',
+            'description' => 'Cool-toned hydrangeas reminiscent of Arctic glacier ice.',
+            'price' => '289',
+            'image' => 'https://lgrmag.com/wp-content/uploads/2023/01/Monrovia-Hydrangea-macrophylla-Seaside-Serenade-Glacier-1024x1024.jpeg'
+        ]) ?>
+
+        <?= view('components/cards/product_card', [
+            'title' => 'Moonshadow Tulips',
+            'description' => 'Dark violet tulips with silvery moonlit edges.',
+            'price' => '319',
+            'image' => 'https://novelnovicetwilight.wordpress.com/wp-content/uploads/2009/04/100_2455.jpg'
+        ]) ?>
+
+        <?= view('components/cards/product_card', [
+            'title' => 'Crystal Petunias',
+            'description' => 'Soft crystal-blue blooms that sparkle like frozen dew.',
+            'price' => '249',
+            'image' => 'https://glenleagreenhouses.com/cdn/shop/products/Petunia_Headliner_Crystal_Sky.jpg?v=1644943013'
+        ]) ?>
+
+        <?= view('components/cards/product_card', [
+            'title' => 'Polar Blossoms',
+            'description' => 'A rare Arctic bloom with delicate white petals and a gentle glow.',
+            'price' => '359',
+            'image' => 'https://www.applewoodseed.com/wp-content/uploads/2016/11/ZEPB-1001.jpg'
+        ]) ?>
+
     </section>
 
     <div class="text-center mt-12">
