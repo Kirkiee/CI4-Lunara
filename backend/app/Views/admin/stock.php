@@ -1,167 +1,282 @@
+<?php
+$session = session();
+$current = uri_string();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunara Admin — Stock Management</title>
+
     <link rel="shortcut icon" type="image/png" href="/assets/lunaraMoonIcon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         body {
-            background: radial-gradient(circle at top, #1e1b2e 0%, #0f0c1d 100%);
+            background: radial-gradient(circle at top, #0a1a2a 0%, #0f2338 40%, #274862 100%);
             font-family: 'Poppins', sans-serif;
+            color: #eef7fa;
         }
 
         .text-gradient {
-            background: linear-gradient(90deg, #d8b4fe, #f9a8d4);
+            background: linear-gradient(90deg, #8ecae6, #a8dadc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .card-hover:hover {
-            transform: translateY(-4px);
-            transition: transform 0.3s ease;
+        .panel {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 22px rgba(10, 25, 60, 0.5);
+            transition: .3s;
         }
 
-        .sidebar {
+        .panel:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(10, 25, 60, 0.7);
+        }
+
+        .btn-arctic {
+            background: #8ecae6;
+            color: #0a1a2a;
+            padding: .5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-arctic:hover {
+            background: #a8dadc;
+        }
+
+        table th,
+        table td {
+            padding: .75rem 1rem;
+        }
+
+        table tbody tr:hover {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
         }
 
-        input,
-        select {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+        .status-instock {
+            color: #a8dadc;
+            font-weight: 600;
+        }
+
+        .status-low {
+            color: #facc15;
+            font-weight: 600;
+        }
+
+        .status-out {
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        .moon {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #99cfe0, #6699b2 60%, #336680);
+            border-radius: 50%;
+            opacity: .55;
+            filter: blur(1px);
+            animation: floatMoon 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatMoon {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-15px);
+            }
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            color: white;
         }
     </style>
 </head>
 
-<body class="text-gray-100 flex min-h-screen">
+<body class="relative flex min-h-screen">
 
-    <!-- 🌙 Sidebar -->
-    <aside class="sidebar w-64 flex flex-col justify-between py-6 px-4 border-r border-white/10">
+    <!-- Sidebar -->
+    <aside class="z-10 flex flex-col justify-between px-4 py-6 border-white/10 border-r w-64"
+        style="background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
+
         <div>
-            <h1 class="text-2xl font-bold text-gradient text-center mb-10">Lunara Admin</h1>
+            <h1 class="mb-10 font-bold text-gradient text-2xl text-center">Lunara Admin</h1>
+
             <nav class="space-y-4">
-                <a href="admin_dashboard.php" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition">🏠 Dashboard</a>
-                <a href="admin_products.php" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition">🌸 Products</a>
-                <a href="admin_orders.php" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition">🛒 Orders</a>
-                <a href="admin_stock.php" class="block px-4 py-2 rounded-lg bg-indigo-500/30 transition">📦 Stock</a>
-                <a href="admin_customers.php" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition">👥 Customers</a>
-                <a href="#" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 transition">⚙️ Settings</a>
+                <a href="/admin/dashboard" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 <?= $current == 'admin/dashboard' ? 'bg-indigo-500/30 font-semibold' : '' ?>">🏠 Dashboard</a>
+                <a href="/admin/stock" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 <?= $current == 'admin/stock' ? 'bg-indigo-500/30 font-semibold' : '' ?>">🌸 Flower Stock</a>
+                <a href="/admin/orders" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 <?= $current == 'admin/orders' ? 'bg-indigo-500/30 font-semibold' : '' ?>">🛒 Orders</a>
+                <a href="/admin/accounts" class="block px-4 py-2 rounded-lg hover:bg-indigo-500/20 <?= $current == 'admin/accounts' ? 'bg-indigo-500/30 font-semibold' : '' ?>">👥 Accounts</a>
             </nav>
         </div>
-        <div class="text-center text-sm text-gray-400 border-t border-white/10 pt-4">
+
+        <div class="pt-4 border-white/10 border-t text-gray-400 text-sm text-center">
+            <?php if (!$session->has('user')): ?>
+                <a href="/login" class="block mb-3 btn-arctic">Login</a>
+            <?php else: ?>
+                <form action="/logout" method="post">
+                    <button type="submit" class="bg-red-500/70 hover:bg-red-500 mb-3 px-4 py-2 rounded-lg w-full font-semibold text-white">
+                        Logout
+                    </button>
+                </form>
+            <?php endif; ?>
             © <?= date('Y') ?> Lunara
         </div>
     </aside>
 
-    <!-- 🌌 Main Content -->
-    <main class="flex-1 p-8 overflow-y-auto relative">
-        <!-- Floating moon effect -->
-        <div class="absolute top-10 right-10 w-24 h-24 bg-gradient-to-tr from-gray-300 to-gray-100 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)] opacity-80"></div>
+    <!-- Main Content -->
+    <main class="relative flex-1 p-8 overflow-y-auto">
+        <div class="moon"></div>
 
-        <!-- Header -->
-        <div class="mb-10">
-            <h2 class="text-4xl font-extrabold text-gradient drop-shadow-lg">Stock Management</h2>
-            <p class="text-gray-400 mt-2">Monitor and update your flower inventory with lunar precision 🌕</p>
-        </div>
+        <h2 class="drop-shadow-lg font-extrabold text-gradient text-4xl">Stock Management</h2>
+        <p class="mt-2 text-gray-300">Monitor and update your flower inventory under the moonlight 🌙</p>
 
-        <!-- Stock Overview Cards -->
-        <div class="grid md:grid-cols-3 gap-8 mb-12">
-            <div class="bg-white/10 p-6 rounded-2xl border border-white/10 card-hover shadow-lg">
-                <h3 class="text-indigo-300 font-semibold mb-2">Total Products in Stock</h3>
-                <p class="text-4xl font-bold text-white">154</p>
-            </div>
-            <div class="bg-white/10 p-6 rounded-2xl border border-white/10 card-hover shadow-lg">
-                <h3 class="text-indigo-300 font-semibold mb-2">Low Stock Items</h3>
-                <p class="text-4xl font-bold text-yellow-300">8</p>
-            </div>
-            <div class="bg-white/10 p-6 rounded-2xl border border-white/10 card-hover shadow-lg">
-                <h3 class="text-indigo-300 font-semibold mb-2">Out of Stock</h3>
-                <p class="text-4xl font-bold text-red-400">3</p>
-            </div>
-        </div>
-
-        <!-- Stock Table Section -->
-        <section class="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg mb-10">
+        <!-- Stock Table -->
+        <section class="mt-8 panel">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-indigo-300">Inventory List</h3>
-                <button class="bg-indigo-400 hover:bg-indigo-500 text-gray-900 px-6 py-2 rounded-full font-semibold transition">
-                    + Update Stock
+                <h3 class="font-bold text-[#8ecae6] text-2xl">Inventory List</h3>
+                <button class="btn-arctic" onclick="document.getElementById('addStockModal').showModal();">
+                    + Add Stock
                 </button>
             </div>
 
-            <!-- Search + Filter -->
-            <div class="flex flex-col md:flex-row gap-4 mb-6">
-                <input type="text" placeholder="Search product..." class="px-4 py-2 rounded-lg flex-1 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                <select class="px-4 py-2 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                    <option>All Status</option>
-                    <option>In Stock</option>
-                    <option>Low Stock</option>
-                    <option>Out of Stock</option>
-                </select>
-            </div>
-
-            <!-- Table -->
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
-                    <thead class="text-indigo-200 border-b border-white/10">
+                    <thead>
                         <tr>
-                            <th class="py-3 px-4">Product</th>
-                            <th class="py-3 px-4">Category</th>
-                            <th class="py-3 px-4">Price</th>
-                            <th class="py-3 px-4">Stock</th>
-                            <th class="py-3 px-4">Status</th>
-                            <th class="py-3 px-4 text-right">Actions</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th class="text-right">Actions</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr class="border-b border-white/5 hover:bg-white/5 transition">
-                            <td class="py-3 px-4 flex items-center gap-3">
-                                <img src="https://s.turbifycdn.com/aah/snowcreek/moon-garden-lily-bulb-collection-18-bulbs-22.png" class="w-10 h-10 rounded-lg object-cover" />
-                                Lunar Lilies
-                            </td>
-                            <td class="py-3 px-4">Lilies</td>
-                            <td class="py-3 px-4">₱299</td>
-                            <td class="py-3 px-4">24</td>
-                            <td class="py-3 px-4"><span class="text-green-300">In Stock</span></td>
-                            <td class="py-3 px-4 text-right">
-                                <button class="text-indigo-300 hover:text-indigo-400">Adjust</button>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-white/5 hover:bg-white/5 transition">
-                            <td class="py-3 px-4 flex items-center gap-3">
-                                <img src="https://i.etsystatic.com/34146895/r/il/6b42c8/6329788818/il_fullxfull.6329788818_4af6.jpg" class="w-10 h-10 rounded-lg object-cover" />
-                                Midnight Roses
-                            </td>
-                            <td class="py-3 px-4">Roses</td>
-                            <td class="py-3 px-4">₱349</td>
-                            <td class="py-3 px-4">5</td>
-                            <td class="py-3 px-4"><span class="text-yellow-300">Low Stock</span></td>
-                            <td class="py-3 px-4 text-right">
-                                <button class="text-indigo-300 hover:text-indigo-400">Adjust</button>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-white/5 hover:bg-white/5 transition">
-                            <td class="py-3 px-4 flex items-center gap-3">
-                                <img src="https://www.oderings.co.nz/assets/Argranthemum-Sassy-Red-web_T_144491_5.jpg" class="w-10 h-10 rounded-lg object-cover" />
-                                Starlit Daisies
-                            </td>
-                            <td class="py-3 px-4">Daisies</td>
-                            <td class="py-3 px-4">₱259</td>
-                            <td class="py-3 px-4">0</td>
-                            <td class="py-3 px-4"><span class="text-red-400">Out of Stock</span></td>
-                            <td class="py-3 px-4 text-right">
-                                <button class="text-indigo-300 hover:text-indigo-400">Adjust</button>
-                            </td>
-                        </tr>
+                        <?php if (!empty($stocks)): ?>
+                            <?php foreach ($stocks as $item): ?>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        <?= esc($item->flower) ?>
+                                    </td>
+
+                                    <td class="px-4 py-3"><?= esc($item->category) ?></td>
+                                    <td class="px-4 py-3">₱<?= number_format($item->price, 2) ?></td>
+                                    <td class="px-4 py-3"><?= esc($item->stock) ?></td>
+                                    <td class="py-3 px-4 <?= $item->status === 'Available' ? 'status-instock' : ($item->status === 'Low Stock' ? 'status-low' : 'status-out') ?>">
+                                        <?= esc($item->status) ?>
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <button
+                                            class="text-[#8ecae6] hover:text-[#a8dadc]"
+                                            onclick="openEditModal(
+        <?= $item->id ?>,
+        '<?= esc($item->flower) ?>',
+        '<?= esc($item->category) ?>',
+        <?= $item->price ?>,
+        <?= $item->stock ?>,
+        '<?= esc($item->status) ?>'
+    )">Adjust</button>
+
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" class="py-4 text-gray-400 text-center">No stock items found.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
         </section>
+
     </main>
+
+    <!-- Add Stock Modal -->
+    <dialog id="addStockModal" class="bg-gray-900/90 backdrop:bg-black/60 p-6 rounded-xl w-96">
+        <h3 class="mb-4 font-bold text-[#8ecae6] text-2xl">Add New Stock</h3>
+
+        <form method="post" action="/admin/stock/create" class="space-y-4">
+            <?= csrf_field() ?>
+            <input type="text" name="flower" placeholder="Flower Name" class="input-field" required>
+            <input type="text" name="category" placeholder="Category" class="input-field" required>
+            <input type="number" step="0.01" name="price" placeholder="Price" class="input-field" required>
+            <input type="number" name="stock" placeholder="Stock Quantity" class="input-field" required>
+            <select name="status" class="input-field" required>
+                <option value="Available">Available</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" onclick="document.getElementById('addStockModal').close();" class="bg-gray-600 btn-arctic">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-arctic">Add Stock</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="editStockModal" class="bg-gray-900/90 backdrop:bg-black/60 p-6 rounded-xl w-96">
+        <h3 class="mb-4 font-bold text-[#8ecae6] text-2xl">Adjust Stock</h3>
+
+        <form id="editStockForm" method="post" class="space-y-4">
+            <?= csrf_field() ?>
+            <input type="text" id="editFlower" name="flower" class="input-field" required>
+            <input type="text" id="editCategory" name="category" class="input-field" required>
+            <input type="number" step="0.01" id="editPrice" name="price" class="input-field" required>
+            <input type="number" id="editQuantity" name="stock" class="input-field" required>
+
+            <select id="editStatus" name="status" class="input-field" required>
+                <option value="Available">Available</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" onclick="document.getElementById('editStockModal').close();" class="bg-gray-600 btn-arctic">Cancel</button>
+                <button type="submit" class="btn-arctic">Save Changes</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        function openEditModal(id, flower, category, price, stock, status) {
+            document.getElementById('editFlower').value = flower;
+            document.getElementById('editCategory').value = category;
+            document.getElementById('editPrice').value = price;
+            document.getElementById('editQuantity').value = stock;
+            document.getElementById('editStatus').value = status;
+
+            // Set correct form action
+            document.getElementById('editStockForm').action = `/admin/stock/update/${id}`;
+
+            document.getElementById('editStockModal').showModal();
+        }
+    </script>
+
+
 </body>
 
 </html>

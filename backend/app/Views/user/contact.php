@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lunara — Moonlit Floristry</title>
+    <title>Lunara — Contact Us</title>
     <link rel="shortcut icon" type="image/png" href="/assets/lunaraMoonIcon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -25,11 +25,6 @@
             text-shadow: 0 0 8px rgba(180, 230, 255, 0.7);
         }
 
-        .card-hover:hover {
-            transform: translateY(-6px);
-        }
-
-        /* ❄ Dark Arctic Floating Ice Orb (Seel-Inspired) */
         .moon-container {
             position: absolute;
             top: 0;
@@ -49,15 +44,12 @@
             width: 160px;
             height: 160px;
 
-            /* Much darker icy tones */
             background: radial-gradient(circle at 40% 40%,
                     #8fa6b8,
                     #6c8295 55%,
                     #4a5a67 100%);
 
             border-radius: 50%;
-
-            /* Extremely reduced glow */
             box-shadow: 0 0 20px 4px rgba(100, 130, 150, 0.15);
 
             filter: brightness(0.55);
@@ -67,16 +59,13 @@
         @keyframes floatIce {
             0% {
                 transform: translate(-50%, 0) scale(1);
-                filter: brightness(1);
             }
 
             100% {
                 transform: translate(-50%, -22px) scale(1.03);
-                filter: brightness(1.08);
             }
         }
 
-        /* ❄ Snow Particles – darker environment, softer white */
         .stars::before,
         .stars::after {
             content: "";
@@ -109,18 +98,12 @@
             }
         }
 
-        section {
-            scroll-margin-top: 80px;
-        }
-
-        /* ❄ Arctic Ice Gradient Text – darker version */
         .text-gradient {
             background: linear-gradient(90deg, #a8e0ff, #d2f3ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     </style>
-
 </head>
 
 <body class="text-gray-100 relative">
@@ -138,52 +121,60 @@
         </div>
 
         <div class="relative z-10">
-            <h2 class="text-5xl md:text-6xl font-extrabold text-gradient mb-6 drop-shadow-lg">
-                Bloom in the Arctic Glow
+            <h2 class="text-5xl md:text-6xl font-extrabold text-gradient mb-4 drop-shadow-lg">
+                Contact Lunara
             </h2>
             <p class="max-w-2xl mx-auto text-lg text-gradient">
-                Welcome to <strong>Lunara</strong> — where floristry meets the calm, icy elegance of the Arctic seas.
+                We'd love to hear from you—questions, orders, custom bouquets, or collaboration inquiries.
             </p>
-            <a href="#products"
-                class="mt-8 inline-block bg-sky-300 hover:bg-sky-400 px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Explore Collection
-            </a>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" class="bg-white/10 backdrop-blur-xl py-20 text-gray-900">
-        <div class="mx-auto px-4 max-w-6xl">
-            <h3 class="mb-12 font-bold text-4xl text-center header-title">Arctic Bloom Collection</h3>
+    <!-- Contact Form Section -->
+    <section id="contact" class="bg-white/10 backdrop-blur-xl py-20 text-gray-900">
+        <div class="mx-auto px-4 max-w-4xl">
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <?= view('components/cards/product_card', [
-                    'title' => 'Lunar Lilies',
-                    'description' => 'Elegant white lilies that bloom like moonlight — perfect for calm evenings and graceful gifts.',
-                    'price' => '299',
-                    'image' => 'https://s.turbifycdn.com/aah/snowcreek/moon-garden-lily-bulb-collection-18-bulbs-22.png',
-                    'link' => '/shop'
-                ]) ?>
+            <h3 class="mb-12 font-bold text-4xl text-center header-title">Get in Touch</h3>
 
-                <?= view('components/cards/product_card', [
-                    'title' => 'Midnight Roses',
-                    'description' => 'Deep purple roses that capture the essence of twilight and mystery.',
-                    'price' => '349',
-                    'image' => 'https://i.etsystatic.com/34146895/r/il/6b42c8/6329788818/il_fullxfull.6329788818_4af6.jpg',
-                    'link' => '/shop'
-                ]) ?>
+            <div class="bg-white/10 border border-white/30 rounded-2xl shadow-xl p-10 backdrop-blur-lg">
 
-                <?= view('components/cards/product_card', [
-                    'title' => 'Starlit Daisies',
-                    'description' => 'Bright daisies that shimmer under moonlight — a touch of magic for your space.',
-                    'price' => '259',
-                    'image' => 'https://www.oderings.co.nz/assets/Argranthemum-Sassy-Red-web_T_144491_5.jpg',
-                    'link' => '/shop'
-                ]) ?>
+                <form action="/send-message" method="POST" class="space-y-6">
+
+                    <div>
+                        <label class="text-lg font-semibold text-indigo-100">Full Name</label>
+                        <input type="text" name="name" required
+                            class="w-full mt-2 px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-gray-100 focus:ring focus:ring-sky-300/40">
+                    </div>
+
+                    <div>
+                        <label class="text-lg font-semibold text-indigo-100">Email Address</label>
+                        <input type="email" name="email" required
+                            class="w-full mt-2 px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-gray-100 focus:ring focus:ring-sky-300/40">
+                    </div>
+
+                    <div>
+                        <label class="text-lg font-semibold text-indigo-100">Message</label>
+                        <textarea name="message" required rows="5"
+                            class="w-full mt-2 px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-gray-100 focus:ring focus:ring-sky-300/40"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="mt-6 bg-sky-300 hover:bg-sky-400 px-8 py-3 rounded-full font-semibold text-gray-900 transition w-full">
+                        Send Message
+                    </button>
+
+                </form>
             </div>
+
+            <!-- Contact Info -->
+            <div class="mt-16 text-center text-indigo-100">
+                <p class="mb-2">📍 Lunara Floristry — Arctic Ridge District</p>
+                <p class="mb-2">📞 +63 912 345 6789</p>
+                <p>✉ support@lunara.com</p>
+            </div>
+
         </div>
     </section>
-
 
     <!-- Footer -->
     <div class="text-center">

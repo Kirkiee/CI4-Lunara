@@ -27,4 +27,16 @@ class Users extends BaseController
     {
         return view('user/roadmap');
     }
+    public function shop()
+    {
+        return view('user/shop');
+    }
+    public function contact()
+    {
+        return view('user/contact');
+    }
+    public function cart()
+    {
+        return view('user/cart');
+    }
 }
