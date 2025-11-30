@@ -188,7 +188,17 @@ $current = uri_string();
                                         <?= esc($item->status) ?>
                                     </td>
                                     <td class="px-4 py-3 text-right">
-                                        <button class="text-[#8ecae6] hover:text-[#a8dadc]">Adjust</button>
+                                        <button
+                                            class="text-[#8ecae6] hover:text-[#a8dadc]"
+                                            onclick="openEditModal(
+        <?= $item->id ?>,
+        '<?= esc($item->flower) ?>',
+        '<?= esc($item->category) ?>',
+        <?= $item->price ?>,
+        <?= $item->stock ?>,
+        '<?= esc($item->status) ?>'
+    )">Adjust</button>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -228,6 +238,45 @@ $current = uri_string();
             </div>
         </form>
     </dialog>
+
+    <dialog id="editStockModal" class="bg-gray-900/90 backdrop:bg-black/60 p-6 rounded-xl w-96">
+        <h3 class="mb-4 font-bold text-[#8ecae6] text-2xl">Adjust Stock</h3>
+
+        <form id="editStockForm" method="post" class="space-y-4">
+            <?= csrf_field() ?>
+            <input type="text" id="editFlower" name="flower" class="input-field" required>
+            <input type="text" id="editCategory" name="category" class="input-field" required>
+            <input type="number" step="0.01" id="editPrice" name="price" class="input-field" required>
+            <input type="number" id="editQuantity" name="stock" class="input-field" required>
+
+            <select id="editStatus" name="status" class="input-field" required>
+                <option value="Available">Available</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+            </select>
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" onclick="document.getElementById('editStockModal').close();" class="bg-gray-600 btn-arctic">Cancel</button>
+                <button type="submit" class="btn-arctic">Save Changes</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        function openEditModal(id, flower, category, price, stock, status) {
+            document.getElementById('editFlower').value = flower;
+            document.getElementById('editCategory').value = category;
+            document.getElementById('editPrice').value = price;
+            document.getElementById('editQuantity').value = stock;
+            document.getElementById('editStatus').value = status;
+
+            // Set correct form action
+            document.getElementById('editStockForm').action = `/admin/stock/update/${id}`;
+
+            document.getElementById('editStockModal').showModal();
+        }
+    </script>
+
 
 </body>
 
