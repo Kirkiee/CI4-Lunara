@@ -160,7 +160,7 @@
                 <?= view('components/cards/product_card', [
                     'title' => 'Lunar Lilies',
                     'description' => 'Elegant white lilies that bloom like moonlight — perfect for calm evenings and graceful gifts.',
-                    'price' => '₱299',
+                    'price' => '299',
                     'image' => 'https://s.turbifycdn.com/aah/snowcreek/moon-garden-lily-bulb-collection-18-bulbs-22.png',
                     'link' => '/shop'
                 ]) ?>
@@ -168,7 +168,7 @@
                 <?= view('components/cards/product_card', [
                     'title' => 'Midnight Roses',
                     'description' => 'Deep purple roses that capture the essence of twilight and mystery.',
-                    'price' => '₱349',
+                    'price' => '349',
                     'image' => 'https://i.etsystatic.com/34146895/r/il/6b42c8/6329788818/il_fullxfull.6329788818_4af6.jpg',
                     'link' => '/shop'
                 ]) ?>
@@ -176,7 +176,7 @@
                 <?= view('components/cards/product_card', [
                     'title' => 'Starlit Daisies',
                     'description' => 'Bright daisies that shimmer under moonlight — a touch of magic for your space.',
-                    'price' => '₱259',
+                    'price' => '259',
                     'image' => 'https://www.oderings.co.nz/assets/Argranthemum-Sassy-Red-web_T_144491_5.jpg',
                     'link' => '/shop'
                 ]) ?>
