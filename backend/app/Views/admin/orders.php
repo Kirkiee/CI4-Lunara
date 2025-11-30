@@ -124,7 +124,12 @@
                                 <td>
                                     <?php if (!empty($items)): ?>
                                         <?php foreach ($items as $item): ?>
-                                            <?= esc($item['flower']) ?> x<?= esc($item['quantity']) ?><br>
+                                            <?php
+                                            // Safely handle both new and old formats
+                                            $name = $item['flower'] ?? $item['title'] ?? 'Unknown';
+                                            $qty  = $item['quantity'] ?? $item['qty'] ?? '?';
+                                            ?>
+                                            <?= esc($name) ?> x<?= esc($qty) ?><br>
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         <em>No items</em>
@@ -142,6 +147,7 @@
                         </tr>
                     <?php endif; ?>
                 </tbody>
+
             </table>
         </section>
     </main>
