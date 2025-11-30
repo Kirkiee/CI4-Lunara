@@ -16,8 +16,6 @@ $routes->get('/contact', 'Users::contact');
 $routes->get('/cart', 'Users::cart');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
-
-$routes->get('/admin/orders', 'Admin::orders');
 $routes->get('/admin/accounts', 'Admin::accounts');
 $routes->get('/admin/request', 'Admin::request');
 
@@ -32,3 +30,5 @@ $routes->post('/admin/accounts/delete/(:num)', 'test\UserDelete::delete/$1');
 $routes->get('/admin/stock', 'StockTest\StockCreate::index');
 $routes->post('/admin/stock/create', 'StockTest\StockCreate::create');
 $routes->post('/admin/stock/update/(:num)', 'StockTest\StockCreate::update/$1');
+$routes->get('/admin/orders', 'Orders::index');               // list all orders
+$routes->get('/admin/orders/view/(:num)', 'Orders::view/$1');
