@@ -53,4 +53,22 @@ class StockCreate extends BaseController
 
         return redirect()->to('/admin/stock');
     }
+
+    public function update($id)
+    {
+        $stockModel = new StockModel();
+        $request = service('request');
+
+        $data = [
+            'flower'   => $request->getPost('flower'),
+            'category' => $request->getPost('category'),
+            'price'    => $request->getPost('price'),
+            'stock'    => $request->getPost('stock'),
+            'status'   => $request->getPost('status'),
+        ];
+
+        $stockModel->update($id, $data);
+
+        return redirect()->to('/admin/stock');
+    }
 }
