@@ -62,7 +62,7 @@
                          hover:from-blue-300/80 hover:to-indigo-300/80
                          backdrop-blur-md border border-white/40 shadow-sm
                          transition duration-200">
-                Buy Now
+                Add to Cart
             </span>
         </div>
 

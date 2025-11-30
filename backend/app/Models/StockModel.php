@@ -8,5 +8,5 @@ class StockModel extends Model
 {
     protected $table = 'stock';  // make sure this matches your database table
     protected $primaryKey = 'id';
-    protected $allowedFields = ['flower', 'category', 'price', 'stock', 'status'];
+    protected $allowedFields = ['flower', 'category', 'price', 'stock', 'status', 'image'];
 }
